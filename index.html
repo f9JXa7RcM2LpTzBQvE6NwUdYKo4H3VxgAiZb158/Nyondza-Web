@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVAR EdTec - Transforming Education with Technology</title>
+    <meta name="description" content="NOVAR EdTec provides innovative learning solutions that empower students and educators worldwide with cutting-edge educational technology.">
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        dark: '#1f2937',
+                        light: '#f9fafb'
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #10b981;
+            --dark: #1f2937;
+            --light: #f9fafb;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        .gradient-bg-reverse {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .app-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .app-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero-pattern {
+            background-color: var(--primary);
+            opacity: 0.9;
+            background-image: radial-gradient(var(--secondary) 1.1px, transparent 1.1px), radial-gradient(var(--secondary) 1.1px, var(--primary) 1.1px);
+            background-size: 44px 44px;
+            background-position: 0 0, 22px 22px;
+        }
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .feature-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        /* Loading animation for images */
+        .image-loading {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Animation delays */
+        .delay-100 {
+            animation-delay: 100ms;
+        }
+        
+        .delay-200 {
+            animation-delay: 200ms;
+        }
+        
+        .delay-300 {
+            animation-delay: 300ms;
+        }
+        
+        .delay-400 {
+            animation-delay: 400ms;
+        }
+        
+        .delay-500 {
+            animation-delay: 500ms;
+        }
+    </style>
+</head>
+<body class="bg-light text-dark antialiased">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-sm shadow-md z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-gradient">NOVAR App</span>
+                </div>
+                <div class="hidden md:flex space-x-10">
+                    <a href="#home" class="nav-link text-dark font-medium hover:text-primary">Home</a>
+                    <a href="#about" class="nav-link text-dark font-medium hover:text-primary">About</a>
+                    <a href="#features" class="nav-link text-dark font-medium hover:text-primary">Features</a>
+                    <a href="#app" class="nav-link text-dark font-medium hover:text-primary">Our App</a>
+                    <a href="#contact" class="nav-link text-dark font-medium hover:text-primary">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-dark focus:outline-none" aria-label="Toggle menu">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-sm px-6 pt-2 pb-4 shadow-lg">
+            <a href="#home" class="block py-3 font-medium border-b border-gray-100 hover:text-primary transition-colors">Home</a>
+            <a href="#about" class="block py-3 font-medium border-b border-gray-100 hover:text-primary transition-colors">About</a>
+            <a href="#features" class="block py-3 font-medium border-b border-gray-100 hover:text-primary transition-colors">Features</a>
+            <a href="#app" class="block py-3 font-medium border-b border-gray-100 hover:text-primary transition-colors">Our App</a>
+            <a href="#contact" class="block py-3 font-medium hover:text-primary transition-colors">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-28 pb-20 md:pt-36 md:pb-28 hero-pattern">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 text-center md:text-left">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white animate__animated animate__fadeInDown">Revolutionizing Education and <span class="text-secondary-300">Building Community</span></h1>
+                    <p class="mt-6 text-xl text-blue-100 animate__animated animate__fadeIn animate__delay-1s">NOVAR connects learners with their favorite tutors, content, lessons, and more, while guiding them toward brighter paths.</p>
+                    <div class="mt-10 flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4 animate__animated animate__fadeInUp animate__delay-2s">
+                        <a href="#app" class="bg-white text-primary font-bold px-8 py-4 rounded-full shadow-lg hover:bg-blue-50 transition duration-300 transform hover:-translate-y-1">Download Our App</a>
+                        <a href="#contact" class="bg-transparent border-2 border-white text-white font-bold px-8 py-4 rounded-full hover:bg-white hover:text-primary transition duration-300 transform hover:-translate-y-1">Contact Us</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 mt-10 md:mt-0 animate__animated animate__zoomIn animate__delay-1s">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-primary/20 rounded-2xl blur-xl"></div>
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" alt="Students using NOVAR EdTec platform" class="rounded-2xl shadow-2xl relative w-full h-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-bold text-primary mb-2">50K+</div>
+                    <div class="text-gray-600">Learners Reached</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-bold text-primary mb-2">2024/12</div>
+                    <div class="text-gray-600">Since when (YYYY/MM)</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-bold text-primary mb-2">South Africa</div>
+                    <div class="text-gray-600">Current Location</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-bold text-primary mb-2">4.6</div>
+                    <div class="text-gray-600">Reviews</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">About NOVAR App</h2>
+            <div class="w-20 h-1 bg-primary mx-auto mb-16"></div>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 pr-0 md:pr-10 mb-10 md:mb-0">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-primary/10 rounded-2xl blur-xl"></div>
+                        <img src="https://images.unsplash.com/photo-1522881193457-37ae97c905bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="About NOVAR EdTec" class="rounded-2xl shadow-lg relative w-full h-auto">
+                    </div>
+                </div>
+                <div class="md:w-1/2 pl-0 md:pl-10">
+                    <h3 class="text-2xl font-semibold mb-4">We Are Revolutionizing Education</h3>
+                    <p class="text-lg text-gray-600 mb-6">Founded in 2024, NOVAR was born from lived experiences and is designed to make education accessible to everyone for free, leveraging digital tools to enhance learning outcomes.</p>
+                    <p class="text-lg text-gray-600 mb-8">Educational content creators combines pedagogical expertise with cutting-edge technology to deliver solutions that make a real impact.</p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex items-start">
+                            <div class="bg-primary-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-lightbulb text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Innovative Approach</h4>
+                                <p class="text-gray-600 text-sm">We constantly explore new ways to enhance learning experiences</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-primary-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-users text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Expert Team</h4>
+                                <p class="text-gray-600 text-sm">Our team combines education and technology expertise</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Our Features</h2>
+            <p class="text-xl text-gray-600 text-center max-w-3xl mx-auto mb-4">Discover educational content and powerful tools for free</p>
+            <div class="w-20 h-1 bg-primary mx-auto mb-16"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Feature 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-md card-hover feature-card">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center text-white text-2xl mb-6 feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Personalized Learning</h3>
+                    <p class="text-gray-600">Adaptive learning paths tailored to each learners needs and progress.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-md card-hover feature-card">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center text-white text-2xl mb-6 feature-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Virtual Classroom</h3>
+                    <p class="text-gray-600">Interactive online classes with real-time collaboration</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-md card-hover feature-card">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center text-white text-2xl mb-6 feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Curriculum alignment</h3>
+                    <p class="text-gray-600">Explore your favourate content aligned to your curriculum</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-white p-8 rounded-2xl shadow-md card-hover feature-card">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center text-white text-2xl mb-6 feature-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Digital Content Library</h3>
+                    <p class="text-gray-600">Access to free educational resources</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="bg-white p-8 rounded-2xl shadow-md card-hover feature-card">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center text-white text-2xl mb-6 feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Mobile Learning</h3>
+                    <p class="text-gray-600">Learn on-the-go with our mobile app available on iOS and Android platforms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">What Our Users Say</h2>
+            <p class="text-xl text-gray-600 text-center max-w-3xl mx-auto mb-4">Hear from users learning experience with NOVAR App</p>
+            <div class="w-20 h-1 bg-primary mx-auto mb-16"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 p-8 rounded-2xl shadow-md testimonial-card">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center text-primary font-bold mr-4">ZT</div>
+                        <div>
+                            <h4 class="font-semibold">Zukhanye Tyakuma</h4>
+                            <p class="text-gray-600 text-sm">User | Google Play Store</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"i started using NOVAR last year December. Although I've been inconsistent with using it [ hence I'm an unreliable source] it's a great app and the updates make it more user friendly 😊. I mostly love the fact that it was developed by South Africans❤️👀"</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 p-8 rounded-2xl shadow-md testimonial-card">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center text-primary font-bold mr-4">MB</div>
+                        <div>
+                            <h4 class="font-semibold">MPIMO BALOYI</h4>
+                            <p class="text-gray-600 text-sm">User | Google Play Store</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"I saw this app being advertised on YouTube and it's developers. I decided to give it a try and wow!!! It is more than what is thought it would be. You shall also give it a try. Good luck on your academic years🧑‍🏫"</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-50 p-8 rounded-2xl shadow-md testimonial-card">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center text-primary font-bold mr-4">MM</div>
+                        <div>
+                            <h4 class="font-semibold">Mxolisi Magagula</h4>
+                            <p class="text-gray-600 text-sm">User | Google Play Store</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"I love this app, I have been recommending it for my students and have seen much improvement from them since Thank you Novar, you are a ray of light 🌞"</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Download Section -->
+    <section id="app" class="py-20 bg-gradient-to-r from-primary-50 to-secondary-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <div class="relative max-w-md mx-auto">
+                        <div class="absolute -inset-4 bg-primary/20 rounded-3xl blur-xl"></div>
+                        <img src="assets/NovaFinal.png" alt="EdTec Mobile App" class="rounded-2xl shadow-xl relative w-full h-auto animate-float">
+                    </div>
+                </div>
+                <div class="md:w-1/2 pl-0 md:pl-10 text-center md:text-left">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Download Our App</h2>
+                    <div class="w-20 h-1 bg-primary mb-6 md:mx-0 mx-auto"></div>
+                    <h3 class="text-2xl font-semibold mb-6">Learning On The Go</h3>
+                    <p class="text-lg text-gray-600 mb-8">Our mobile app brings the complete NOVAR experience to your smartphone.</p>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4 mb-10">
+                        <a href="https://play.google.com/store/apps/details?id=com.novar.edtec" class="app-btn bg-dark text-white px-6 py-4 rounded-xl flex items-center justify-center shadow-lg">
+                            <i class="fab fa-google-play text-2xl mr-3"></i>
+                            <div>
+                                <div class="text-xs">GET IT ON</div>
+                                <div class="font-bold">Google Play</div>
+                            </div>
+                        </a>
+                        <a href="#" class="app-btn bg-dark text-white px-6 py-4 rounded-xl flex items-center justify-center shadow-lg">
+                            <i class="fab fa-apple text-2xl mr-3"></i>
+                            <div>
+                                <div class="text-xs">DOWNLOAD ON THE</div>
+                                <div class="font-bold">App Store</div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- <div class="bg-white/80 p-6 rounded-2xl shadow-md backdrop-blur-sm">
+                        <h4 class="font-semibold text-lg mb-2">App Features:</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-secondary mr-2"></i> Access all your courses and materials</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-secondary mr-2"></i> Submit assignments and take quizzes</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-secondary mr-2"></i> Join live virtual classes</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-secondary mr-2"></i> Track your learning progress</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-secondary mr-2"></i> Receive notifications and reminders</li>
+                        </ul>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Get In Touch</h2>
+            <p class="text-xl text-gray-600 text-center max-w-3xl mx-auto mb-4">Have questions feel free to contact our team for any assistance</p>
+            <div class="w-20 h-1 bg-primary mx-auto mb-16"></div>
+            
+            <div class="flex flex-col lg:flex-row gap-10">
+                <div class="lg:w-2/5">
+                    <h3 class="text-2xl font-semibold mb-6">Contact Information</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center text-white text-xl mr-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Email</h4>
+                                <p class="text-gray-600">support@studentport.co.za</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-3/5">
+                    <div class="bg-gray-50 p-8 rounded-2xl shadow-md">
+                        <h3 class="text-2xl font-semibold mb-6">Send Us a Message</h3>
+                        <form id="contactForm">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="name" class="block text-gray-700 mb-2">Full Name *</label>
+                                    <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                                    <div id="nameError" class="text-red-500 text-sm mt-1 hidden">Please enter your name</div>
+                                </div>
+                                
+                                <div>
+                                    <label for="email" class="block text-gray-700 mb-2">Email Address *</label>
+                                    <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                                    <div id="emailError" class="text-red-500 text-sm mt-1 hidden">Please enter a valid email address</div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="subject" class="block text-gray-700 mb-2">Subject *</label>
+                                <input type="text" id="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                                <div id="subjectError" class="text-red-500 text-sm mt-1 hidden">Please enter a subject</div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 mb-2">Message *</label>
+                                <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required></textarea>
+                                <div id="messageError" class="text-red-500 text-sm mt-1 hidden">Please enter your message</div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="whatsappCheck" class="form-checkbox text-primary rounded">
+                                    <span class="ml-2 text-gray-700">Also contact me via WhatsApp</span>
+                                </label>
+                            </div>
+                            
+                            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                                <button type="submit" class="bg-primary text-white font-bold px-8 py-4 rounded-lg hover:bg-primary-600 transition duration-300 flex-1 transform hover:-translate-y-1">Send Message</button>
+                                <button type="button" id="whatsappBtn" class="bg-green-500 text-white font-bold px-8 py-4 rounded-lg hover:bg-green-600 transition duration-300 flex items-center justify-center transform hover:-translate-y-1">
+                                    <i class="fab fa-whatsapp mr-2"></i> WhatsApp
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- Success/Error Messages -->
+                        <div id="successMessage" class="mt-6 p-4 bg-green-100 text-green-700 rounded-lg hidden">
+                            <i class="fas fa-check-circle mr-2"></i> Your message has been sent successfully!
+                        </div>
+                        
+                        <div id="errorMessage" class="mt-6 p-4 bg-red-100 text-red-700 rounded-lg hidden">
+                            <i class="fas fa-exclamation-circle mr-2"></i> There was an error sending your message. Please try again.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 gradient-bg-reverse">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Transform Your Educational Experience?</h2>
+            <p class="text-xl text-blue-100 max-w-3xl mx-auto mb-10">Join thousands of educational content creators and students who are already benefiting from NOVAR App learning platform.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#contact" class="bg-white text-primary font-bold px-8 py-4 rounded-full shadow-lg hover:bg-blue-50 transition duration-300">Get Started Today</a>
+                <a href="#features" class="bg-transparent border-2 border-white text-white font-bold px-8 py-4 rounded-full hover:bg-white hover:text-primary transition duration-300">Explore Features</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-12 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">NOVAR App</h3>
+                    <p class="text-gray-400 mb-6">Transforming education with innovative technology solutions that empower learners and educators.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition duration-300">About</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition duration-300">Features</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-white transition duration-300">Testimonials</a></li>
+                        <li><a href="#app" class="text-gray-400 hover:text-white transition duration-300">Our App</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Documentation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Webinars</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Download Our App</h4>
+                    <div class="flex flex-col space-y-4">
+                        <a href="https://play.google.com/store/apps/details?id=com.novar.edtec" class="bg-gray-700 text-white px-4 py-3 rounded-lg flex items-center justify-center hover:bg-gray-600 transition duration-300">
+                            <i class="fab fa-google-play mr-2"></i> Google Play
+                        </a>
+                        <a href="#" class="bg-gray-700 text-white px-4 py-3 rounded-lg flex items-center justify-center hover:bg-gray-600 transition duration-300">
+                            <i class="fab fa-apple mr-2"></i> App Store
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-400">
+                <p>&copy; 2025 NOVAR App. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 bg-primary text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:bg-primary-600">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Menu toggle functionality
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+            this.querySelector('i').classList.toggle('fa-bars');
+            this.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+                document.getElementById('menu-toggle').querySelector('i').classList.add('fa-bars');
+                document.getElementById('menu-toggle').querySelector('i').classList.remove('fa-times');
+            });
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // FAQ accordion functionality
+        document.querySelectorAll('.faq button').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                // Toggle current item
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+                
+                // Close other items
+                document.querySelectorAll('.faq button').forEach(otherButton => {
+                    if (otherButton !== button) {
+                        otherButton.nextElementSibling.classList.add('hidden');
+                        otherButton.querySelector('i').classList.remove('rotate-180');
+                    }
+                });
+            });
+        });
+
+        // Form validation and submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Reset errors
+            document.querySelectorAll('[id$="Error"]').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            let isValid = true;
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            // Validate name
+            if (name === '') {
+                document.getElementById('nameError').classList.remove('hidden');
+                isValid = false;
+            }
+            
+            // Validate email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('emailError').classList.remove('hidden');
+                isValid = false;
+            }
+            
+            // Validate subject
+            if (subject === '') {
+                document.getElementById('subjectError').classList.remove('hidden');
+                isValid = false;
+            }
+            
+            // Validate message
+            if (message === '') {
+                document.getElementById('messageError').classList.remove('hidden');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Here you would normally send the form data to your server
+                // For demonstration, we'll simulate a successful submission
+                simulateFormSubmission();
+            }
+        });
+        
+        // WhatsApp button functionality
+        document.getElementById('whatsappBtn').addEventListener('click', function() {
+            const name = document.getElementById('name').value.trim() || 'Visitor';
+            const email = document.getElementById('email').value.trim() || 'Not provided';
+            const subject = document.getElementById('subject').value.trim() || 'No subject';
+            const message = document.getElementById('message').value.trim() || 'No message';
+            
+            const whatsappMessage = `Hello, I'm ${name} (${email}). Regarding: ${subject}. Message: ${message}`;
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            
+            // Open WhatsApp with pre-filled message
+            window.open(`https://wa.me/+27634888362?text=${encodedMessage}`, '_blank');
+        });
+        
+        // Simulate form submission (replace with actual API call)
+        function simulateFormSubmission() {
+            // Show loading state
+            const submitBtn = document.querySelector('#contactForm button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call delay
+            setTimeout(() => {
+                // Show success message
+                document.getElementById('successMessage').classList.remove('hidden');
+                document.getElementById('errorMessage').classList.add('hidden');
+                
+                // Reset form
+                document.getElementById('contactForm').reset();
+                
+                // Reset button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('successMessage').classList.add('hidden');
+                }, 5000);
+            }, 1500);
+        }
+        
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate__animated');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    const animation = element.getAttribute('data-animation') || 'fadeInUp';
+                    element.classList.add(`animate__${animation}`);
+                }
+            });
+        }
+        
+        // Initialize animations on scroll
+        window.addEventListener('scroll', animateOnScroll);
+        // Trigger once on load
+        window.addEventListener('load', animateOnScroll);
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg', 'py-2');
+                nav.classList.remove('py-3');
+            } else {
+                nav.classList.remove('shadow-lg', 'py-2');
+                nav.classList.add('py-3');
+            }
+        });
+        
+        // Lazy loading for images
+        document.addEventListener('DOMContentLoaded', function() {
+            const lazyImages = document.querySelectorAll('img');
+            
+            const lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        const lazyImage = entry.target;
+                        lazyImage.classList.remove('image-loading');
+                        lazyImageObserver.unobserve(lazyImage);
+                    }
+                });
+            });
+            
+            lazyImages.forEach(function(lazyImage) {
+                lazyImage.classList.add('image-loading');
+                lazyImageObserver.observe(lazyImage);
+            });
+        });
+    </script>
+</body>
+</html>
